@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Enter Student Marks 📝</h2>
+
+<form method="GET">
+    <select name="reg_no" onchange="this.form.submit()">
+        <option value="">-- Select Student --</option>
+        {% for s in students %}
+        <option value="{{ s.reg_no }}" {% if student and s.reg_no == student.reg_no %}selected{% endif %}>{{ s.reg_no }} - {{ s.name }}</option>
+        {% endfor %}
+    </select>
+</form>
+
+{% if student %}
+    <h3 style="margin-top:25px;">{{ student.name }} ({{ student.dept }})</h3>
+
+    <form method="POST">
+        <input type="hidden" name="reg_no" value="{{ student.reg_no }}">
+
+        {% for s in subjects %}
+            <label>{{ s.code }} - {{ s.name }}</label>
+            <input type="number" name="{{ s.code }}" min="0" max="100" required>
+        {% endfor %}
+
+        <button>Save Marks</button>
+    </form>
+{% endif %}
+
+{% endblock %}

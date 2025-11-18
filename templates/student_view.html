@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Result</title>
+
+<style>
+    body {
+        background: #050506;
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        color: #e6e6e6;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        padding: 18px 40px;
+        font-size: 20px;
+        background: #0d0d0f;
+        border-bottom: 2px solid #8b000080;
+    }
+
+    .header a {
+        text-decoration: none;
+        color: #ff4b4b;
+        font-weight: 500;
+        margin-left: 15px;
+        transition: 0.3s;
+    }
+    .header a:hover { color: #ff7777; }
+
+    h1 {
+        text-align: center;
+        margin-top: 45px;
+        font-size: 34px;
+        color: #ff4b4b;
+        text-shadow: 0 0 6px #a80000;
+    }
+
+    .info-box {
+        width: 420px;
+        margin: 30px auto;
+        padding: 20px;
+        background: #111113;
+        border: 1px solid #8b0000a0;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 0 14px #8b000050;
+    }
+
+    .info-box span { font-weight: 600; }
+
+    .result-box {
+        width: 420px;
+        margin: 20px auto;
+        padding: 25px;
+        background: #160f10;
+        border-left: 6px solid {% if result.percentage >= 50 %}#00c66f{% else %}#ff3838{% endif %};
+        text-align: center;
+        border-radius: 8px;
+        font-size: 18px;
+    }
+
+    table {
+        width: 80%;
+        margin: 60px auto;
+        border-collapse: collapse;
+        font-size: 18px;
+    }
+
+    th {
+        background: #1a1a1d;
+        padding: 12px;
+        border-bottom: 2px solid #8b0000;
+    }
+
+    td {
+        padding: 10px;
+        text-align: center;
+        border-bottom: 1px solid #3a3a3a;
+    }
+
+    .pass { color: #00c66f; font-weight: 700; }
+    .fail { color: #ff3838; font-weight: 700; }
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <span>🖤 Student Result Portal</span>
+    <a href="/logout">Logout</a>
+</div>
+
+<h1>Welcome {{ profile.name }}</h1>
+
+<div class="info-box">
+    <div><span>Reg No:</span> {{ profile.reg_no }}</div>
+    <div><span>Department:</span> {{ profile.dept }} | <span>Year:</span> {{ profile.year }}</div>
+</div>
+
+<div class="result-box">
+    <div><strong>Total Marks:</strong> {{ result.total }}</div>
+    <div><strong>Percentage:</strong> {{ result.percentage }}%</div>
+    <div><strong>Status:</strong> 
+        {% if result.percentage >= 50 %}
+            <span class="pass">PASS ✅</span>
+        {% else %}
+            <span class="fail">FAIL ❌</span>
+        {% endif %}
+    </div>
+</div>
+
+<h2 style="text-align:center; margin-top:40px;">Your Marks</h2>
+
+<table>
+    <tr>
+        <th>Subject Code</th>
+        <th>Subject Name</th>
+        <th>Marks</th>
+    </tr>
+
+    {% for sub in subjects %}
+    <tr>
+        <td>{{ sub.code }}</td>
+        <td>{{ sub.name }}</td>
+        <td>{{ result.marks[sub.code] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<div style="text-align:center; margin-top:40px;">
+  <a href="{{ url_for('students.download_result', reg_no=profile.reg_no) }}"
+     style="background:#a80000; padding:12px 26px; border-radius:7px; color:white; text-decoration:none; font-weight:bold;">
+     Download PDF ⬇️
+  </a>
+</div>
+
+
+<style>
+.download-box {
+    text-align:center;
+    margin-top: 35px;
+    margin-bottom: 60px;
+}
+
+.btn-download {
+    background:#a80000;
+    padding:12px 28px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+    color:white;
+    box-shadow:0 0 10px #a8000050;
+    transition:0.3s;
+}
+.btn-download:hover {
+    background:#d00000;
+    box-shadow:0 0 14px #ff3b3b;
+}
+</style>
+
+
+</body>
+</html>

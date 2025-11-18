@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            background: #0a0a0f;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 40px;
+            font-size: 20px;
+            color: #ff7edb;
+            border-bottom: 2px solid #ff33bb50;
+            box-shadow: 0 0 15px #ff33bb50;
+        }
+
+        .header a {
+            text-decoration: none;
+            color: #ffb4f4;
+            font-weight: 500;
+            margin-left: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 45px;
+            color: #ff9ae0;
+            font-size: 34px;
+            text-shadow: 0 0 18px #ff4fd4;
+            animation: titleGlow 2s infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from { text-shadow: 0 0 8px #ff4fd4; }
+            to { text-shadow: 0 0 18px #ff9ae0; }
+        }
+
+        .dashboard-container {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 70px;
+        }
+
+        .card {
+            width: 240px;
+            height: 230px;
+            background: rgba(255, 0, 128, 0.08);
+            border: 1px solid #ff4fd48c;
+            border-radius: 18px;
+            text-align: center;
+            padding-top: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 18px #ff2db6a0;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 0 24px #ff7fe8, 0 0 50px #ff5ad1;
+        }
+
+        .card img {
+            width: 70px;
+            margin-bottom: 20px;
+        }
+
+        .card a {
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffbdf5;
+        }
+
+        .view-students-link {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .view-students-link a {
+            color: #b87aff;
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        .view-students-link a:hover {
+            text-shadow: 0 0 12px #d29cff;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    <span>Student Result Portal</span>
+    <div>
+        <a href="/admin">Dashboard</a>
+        <a href="/logout">Logout</a>
+    </div>
+</div>
+
+<h1>Admin Dashboard </h1>
+
+<div class="dashboard-container">
+
+    <div class="card" onclick="location.href='/admin/student/register'">
+        <img src="https://img.icons8.com/color/96/000000/graduation-cap.png">
+        <a href="/admin/student/register">New Student</a>
+    </div>
+
+    <div class="card" onclick="location.href='/admin/subjects'">
+        <img src="https://img.icons8.com/color/96/000000/books.png">
+        <a href="/admin/subjects">Subjects</a>
+    </div>
+
+    <div class="card" onclick="location.href='/admin/result'">
+        <img src="https://img.icons8.com/color/96/000000/document.png">
+        <a href="/admin/result">Enter Marks</a>
+    </div>
+
+</div>
+
+<div class="view-students-link">
+    <a href="/admin/students">👥 View Registered Students</a>
+</div>
+
+</body>
+</html>

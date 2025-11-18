@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Department Subjects 📚</h2>
+
+{% for dept, subjects in grouped.items() %}
+    <h3 style="margin-top:25px; color:#ff9ad5;">{{ dept }}</h3>
+    <table class="pink-table">
+        <tr><th>Code</th><th>Subject Name</th></tr>
+        {% for s in subjects %}
+        <tr>
+            <td>{{ s.code }}</td>
+            <td>{{ s.name }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endfor %}
+
+<style>
+.pink-table {
+    width:100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+}
+.pink-table th, .pink-table td {
+    border:1px solid #ff69b4;
+    padding:8px;
+}
+</style>
+
+{% endblock %}

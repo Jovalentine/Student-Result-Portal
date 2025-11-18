@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="title">Student Profile </h1>
+{% if student.photo %}
+<div class="photo-box">
+    <img src="{{ url_for('static', filename='uploads/' ~ student.photo) }}" alt="Profile">
+</div>
+{% endif %}
+
+
+
+<div class="profile-card">
+    <p><span>Reg No:</span> {{ student.reg_no }}</p>
+    <p><span>Name:</span> {{ student.name }}</p>
+    <p><span>Department:</span> {{ student.dept }}</p>
+    <p><span>Year:</span> {{ student.year }}</p>
+</div>
+
+{% if result %}
+<div class="result-box">
+    <h2>Result</h2>
+    <p><strong>Total:</strong> {{ result.total }}</p>
+    <p><strong>Percentage:</strong> {{ result.percentage }}%</p>
+    <p><strong>Status:</strong>
+        {% if result.percentage >= 50 %}
+            <span class="pass">PASS ✨</span>
+        {% else %}
+            <span class="fail">FAIL 💔</span>
+        {% endif %}
+    </p>
+</div>
+
+<h2 class="sub-title">Subject Marks</h2>
+
+<table class="bp-table">
+    <tr>
+        <th>Subject Code</th>
+        <th>Marks</th>
+    </tr>
+
+    {% for code, mark in result.marks.items() %}
+    <tr>
+        <td>{{ code }}</td>
+        <td>{{ mark }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% else %}
+<p class="no-result">⚠️ No marks uploaded yet.</p>
+{% endif %}
+
+<div class="actions">
+    <button onclick="openEditForm()" class="btn-edit">Edit Profile</button>
+
+    <form action="{{ url_for('students.admin_delete_student', reg_no=student.reg_no) }}" method="POST">
+        <button class="btn-del" onclick="return confirm('Delete this student?')">Delete</button>
+    </form>
+</div>
+
+<!-- Edit Profile Popup -->
+<div id="editPopup" class="popup">
+    <div class="popup-content">
+        <h3>Update Student</h3>
+        <form action="{{ url_for('students.admin_edit_student', reg_no=student.reg_no) }}" method="POST">
+
+            <input type="text" name="name" value="{{ student.name }}" required>
+
+            <select name="dept">
+                <option {{ "selected" if student.dept=="CSE" }}>CSE</option>
+                <option {{ "selected" if student.dept=="IT" }}>IT</option>
+                <option {{ "selected" if student.dept=="ECE" }}>ECE</option>
+                <option {{ "selected" if student.dept=="CIVIL" }}>CIVIL</option>
+            </select>
+
+            <select name="year">
+                <option {{ "selected" if student.year=="1st" }}>1st</option>
+                <option {{ "selected" if student.year=="2nd" }}>2nd</option>
+                <option {{ "selected" if student.year=="3rd" }}>3rd</option>
+                <option {{ "selected" if student.year=="4th" }}>4th</option>
+            </select>
+
+            <input type="password" name="password" placeholder="Change Password (optional)">
+            <button type="submit" class="btn-save">Save</button>
+            <button type="button" class="btn-close" onclick="closeEditForm()">Cancel</button>
+        </form>
+    </div>
+</div>
+
+
+
+<style>
+.title {
+    text-align:center; margin-top:35px;
+    font-size:32px; color:#ffb7ff;
+    text-shadow:0 0 12px #ff4dff;
+}
+
+/* Profile + Result Cards */
+.profile-card, .result-box {
+    width:420px; margin:28px auto; padding:22px;
+    background:rgba(255,150,255,0.08);
+    border-radius:14px; text-align:center;
+    border:1px solid #ff71ff;
+    box-shadow:0 0 25px #ff82ff50;
+}
+.profile-card span { color:#ff8af7; font-weight:600; }
+
+.pass { color:#72ffda; font-weight:bold; text-shadow:0 0 8px #5bffd8; }
+.fail { color:#ff5f8d; font-weight:bold; text-shadow:0 0 8px #ff4d9a; }
+
+/* Marks Table */
+.sub-title { text-align:center; margin-top:40px; color:#ffbaff; }
+
+.bp-table {
+    width:75%; margin:30px auto;
+    border-collapse:collapse; font-size:18px;
+    background:rgba(255,255,255,0.05);
+}
+.bp-table th {
+    padding:14px; background:#3a003f;
+    color:#ffd9ff; text-shadow:0 0 8px #ff8aff;
+}
+.bp-table td {
+    padding:12px; border-bottom:1px solid #884caa;
+    text-align:center; color:#ffdfff;
+}
+.bp-table tr:hover {
+    background:rgba(255,100,255,0.2);
+    transition:0.3s;
+}
+
+/* Buttons */
+.actions { text-align:center; margin-top:35px; }
+.btn-edit, .btn-del {
+    padding:10px 18px; border-radius:8px; font-weight:bold;
+    border:none; cursor:pointer; transition:0.3s;
+}
+.btn-edit { background:#c56bff; color:white; }
+.btn-edit:hover { background:#e48cff; }
+
+.btn-del { background:#ff4f7f; color:white; }
+.btn-del:hover { background:#ff2e68; }
+
+/* Popup */
+.popup { display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+         background:rgba(0,0,0,0.75); backdrop-filter:blur(4px); }
+
+.popup-content {
+    background:#2b0033; width:360px; padding:25px; margin:120px auto;
+    border-radius:14px; border:1px solid #ff8aff;
+    box-shadow:0 0 20px #ff7bffb3;
+}
+.popup-content input, .popup-content select {
+    width:100%; padding:11px; margin:10px 0;
+    background:#3c0044; border:1px solid #ff6cff;
+    border-radius:8px; color:white;
+}
+.btn-save { background:#ff74d0; width:100%; padding:10px; }
+.btn-close { margin-top:8px; background:#555; width:100%; padding:10px; }
+</style>
+
+<script>
+function openEditForm(){ document.getElementById("editPopup").style.display="block"; }
+function closeEditForm(){ document.getElementById("editPopup").style.display="none"; }
+</script>
+
+{% endblock %}

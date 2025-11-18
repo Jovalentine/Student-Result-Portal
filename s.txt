@@ -1,0 +1,8 @@
+A) Download Marksheet as PDF
+B) Animated Loading Transitions
+C) Add College / University Logo Header
+D) Add Dark-Purple Gradient Visual Charts
+
+models/student.py
+student_routes.py
+

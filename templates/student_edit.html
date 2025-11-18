@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="title">Edit Student Details 🎀</h2>
+
+<form method="POST" class="edit-box">
+
+    <label>Student Name</label>
+    <input type="text" name="name" value="{{ student.name }}" required>
+
+    <label>Department</label>
+    <select name="dept">
+        <option value="CSE" {% if student.dept=="CSE" %}selected{% endif %}>CSE</option>
+        <option value="IT" {% if student.dept=="IT" %}selected{% endif %}>IT</option>
+        <option value="ECE" {% if student.dept=="ECE" %}selected{% endif %}>ECE</option>
+        <option value="CIVIL" {% if student.dept=="CIVIL" %}selected{% endif %}>CIVIL</option>
+    </select>
+
+    <label>Year</label>
+    <select name="year">
+        <option {% if student.year=="1st" %}selected{% endif %}>1st</option>
+        <option {% if student.year=="2nd" %}selected{% endif %}>2nd</option>
+        <option {% if student.year=="3rd" %}selected{% endif %}>3rd</option>
+        <option {% if student.year=="4th" %}selected{% endif %}>4th</option>
+    </select>
+
+    <label>Change Password (Optional)</label>
+    <input type="password" name="password" placeholder="Leave blank to keep same">
+
+    <button type="submit" class="btn-save">💾 Save Changes</button>
+</form>
+
+<style>
+.title {
+    text-align:center;
+    color:#ffb3ff;
+    text-shadow:0 0 8px #ff4dff;
+    margin-top:30px;
+}
+
+/* Form Container */
+.edit-box {
+    width:420px;
+    margin:40px auto;
+    background:rgba(255,0,180,0.08);
+    padding:25px;
+    border-radius:14px;
+    box-shadow:0 0 18px #ff00d477;
+    border:1px solid #ff5cd4;
+}
+
+.edit-box label {
+    font-size:16px;
+    margin-top:12px;
+    display:block;
+    color:#ffd6ff;
+}
+
+.edit-box input, .edit-box select {
+    width:100%;
+    padding:10px;
+    margin-top:6px;
+    background:#2b002b;
+    border:1px solid #ff70e6;
+    border-radius:8px;
+    color:#ffd6ff;
+    font-size:15px;
+    transition:0.3s;
+}
+
+.edit-box input:focus, .edit-box select:focus {
+    box-shadow:0 0 10px #ff9cff;
+    border-color:#ffb3ff;
+}
+
+.btn-save {
+    width:100%;
+    padding:12px;
+    margin-top:18px;
+    background:#ff4fa8;
+    border:none;
+    border-radius:8px;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn-save:hover {
+    background:#ff1e85;
+    box-shadow:0 0 14px #ff42ce;
+}
+</style>
+
+{% endblock %}

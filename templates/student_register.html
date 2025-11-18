@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Register New Student 🎓</h2>
+
+<form method="POST" enctype="multipart/form-data" style="max-width: 450px; margin:auto;">
+
+
+    <label>Register Number</label>
+    <input type="text" name="reg_no" required>
+
+    <label>Student Name</label>
+    <input type="text" name="name" required>
+    <label>Student Photo :</label>
+    <input type="file" name="photo" accept="image/*">
+
+
+    <label>Department</label>
+    <select name="dept">
+        <option value="CSE">CSE</option>
+        <option value="CIVIL">CIVIL</option>
+        <option value="ECE">ECE</option>
+        <option value="IT">IT</option>
+    </select>
+
+    <label>Year</label>
+    <select name="year">
+        <option value="4th">4th Year</option>
+        <option value="3rd">3rd Year</option>
+        <option value="2nd">2nd Year</option>
+        <option value="1st">1st Year</option>
+    </select>
+
+    <label>Login Password</label>
+    <input type="text" name="password" required>
+
+    <button>Register</button>
+</form>
+
+{% endblock %}

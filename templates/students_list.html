@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="title">Registered Students 🎓</h2>
+
+<table class="pink-table">
+    <tr>
+        <th>Reg No</th>
+        <th>Name</th>
+        <th>Dept</th>
+        <th>Year</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for s in students %}
+    <tr class="row-hover">
+        <td>{{ s.reg_no }}</td>
+        <td>{{ s.name }}</td>
+        <td>{{ s.dept }}</td>
+        <td>{{ s.year }}</td>
+        <td class="action-cell">
+
+            <!-- VIEW PROFILE -->
+            <a class="btn-view" href="{{ url_for('students.admin_view_student', reg_no=s.reg_no) }}">View</a>
+
+            <!-- DELETE STUDENT -->
+            <form action="{{ url_for('students.admin_delete_student', reg_no=s.reg_no) }}" 
+                  method="POST" style="display:inline;">
+                <button class="btn-del" onclick="return confirm('❗ Delete {{ s.name }} ? This will remove result too.')">
+                    Delete
+                </button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+<style>
+.title {
+    text-align:center;
+    margin-top:30px;
+    font-size:32px;
+    color:#ffb3ff;
+    text-shadow:0 0 10px #ff00ff;
+}
+
+/* Table Layout */
+.pink-table {
+    width:85%;
+    margin:50px auto;
+    text-align:center;
+    border-collapse:collapse;
+    font-size:18px;
+    color:#f3d6ff;
+}
+
+.pink-table th {
+    padding:14px;
+    background:rgba(255,0,180,0.15);
+    border-bottom:2px solid #ff4ecb;
+    text-shadow:0 0 8px #ff00c8;
+}
+
+.pink-table td {
+    padding:12px 8px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    transition:0.3s;
+}
+
+.row-hover:hover {
+    background:rgba(255,0,140,0.18);
+    box-shadow:0 0 18px #ff3af7a4;
+    transform:scale(1.01);
+}
+
+/* Buttons */
+.action-cell { white-space:nowrap; }
+
+.btn-view, .btn-del {
+    padding:7px 14px;
+    border-radius:6px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+    border:none;
+}
+
+/* View Button */
+.btn-view {
+    background:#c56bff;
+    color:white;
+}
+.btn-view:hover {
+    background:#ff9aff;
+    box-shadow:0 0 8px #ffb3ff;
+}
+
+/* Delete Button */
+.btn-del {
+    background:#ff4f7f;
+    color:white;
+}
+.btn-del:hover {
+    background:#ff1a4d;
+    box-shadow:0 0 8px #ff386b;
+}
+</style>
+
+{% endblock %}
