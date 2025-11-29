@@ -44,36 +44,6 @@ PDF Generation: ReportLab
 
 Server: Gunicorn/Nginx (optional for deployment)
 
-📁 Project Structure
-Student-Result-Portal/
-│── routes/
-│   ├── auth_routes.py
-│   ├── student_routes.py
-│   ├── admin_routes.py
-│
-│── models/
-│   ├── student.py
-│   ├── marks.py
-│   ├── user.py
-│   ├── subject.py
-│
-│── templates/
-│   ├── base.html
-│   ├── student_home.html
-│   ├── student_result.html
-│   ├── student_profile.html
-│   ├── admin_home.html
-│   ├── students_list.html
-│   ├── subjects.html
-│   ├── result_entry.html
-│
-│── static/
-│   ├── uploads/        # student photos
-│   ├── css/
-│   ├── js/
-│── app.py
-│── requirements.txt
-│── README.md
 
 🔧 Installation & Setup
 1️⃣ Clone the repository
@@ -109,3 +79,4 @@ Marks table
 Total, percentage, pass/fail
 
 College branding
+Auto page breaks (for many subjects)
